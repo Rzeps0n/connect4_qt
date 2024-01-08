@@ -1,19 +1,22 @@
 #include "mainwindow.h"
+
 #include <QPropertyAnimation>
+
 #include <QEasingCurve>
+
 #include <QAbstractAnimation>
+
 #include <QLabel>
+
 #include "GameConfig.h"
 
-
-MainWindow::MainWindow(QWidget *parent)
-        : QMainWindow(parent), currentPlayer(1)
+MainWindow::MainWindow(QWidget* parent)
+        : QMainWindow(parent)
+        , currentPlayer(1)
 {
     resize(800, 600);
     gameBoard = new GameBoard(this);
     setCentralWidget(gameBoard);
-
-    gridLayout = new QGridLayout(gameBoard);
     connect(gameBoard, &GameBoard::columnClicked, this, &MainWindow::handleColumnClicked);
     setWindowTitle("Connect 4");
 
@@ -24,11 +27,11 @@ MainWindow::MainWindow(QWidget *parent)
     }
 }
 
-MainWindow::~MainWindow()
-{
-}
+MainWindow::~MainWindow() {}
 
-void MainWindow::handleColumnClicked(int column) {
+void
+MainWindow::handleColumnClicked(int column)
+{
     int row = findEmptyRow(column);
     if (row < 0) {
         qDebug() << "Column" << column << "is full!";
@@ -40,7 +43,7 @@ void MainWindow::handleColumnClicked(int column) {
     int tokenSpacing = columnWidth / 10;
 
     QPoint center = gameBoard->calculateCenter(column, row);
-    QLabel *token = new QLabel(gameBoard);
+    QLabel* token = new QLabel(gameBoard);
     QString color = (currentPlayer == 1) ? "red" : "yellow";
     token->setStyleSheet(QString("QLabel { background-color: %1; }").arg(color));
 
@@ -56,9 +59,8 @@ void MainWindow::handleColumnClicked(int column) {
     token->move(startPos);
     token->show();
 
-
     // Animate the token falling
-    QPropertyAnimation *animation = new QPropertyAnimation(token, "geometry");
+    QPropertyAnimation* animation = new QPropertyAnimation(token, "geometry");
     animation->setDuration(500);
     animation->setStartValue(QRect(startPos, token->size()));
     animation->setEndValue(QRect(endPos, token->size()));
@@ -70,9 +72,9 @@ void MainWindow::handleColumnClicked(int column) {
     currentPlayer = (currentPlayer == 1) ? 2 : 1;
 }
 
-
-
-int MainWindow::findEmptyRow(int column) {
+int
+MainWindow::findEmptyRow(int column)
+{
     for (int row = GameConfig::numRows - 1; row >= 0; --row) {
         if (labels[row][column] == nullptr) {
             return row;
@@ -81,8 +83,8 @@ int MainWindow::findEmptyRow(int column) {
     return -1; // No empty row found, column is full
 }
 
-
-bool MainWindow::checkForWin(int row, int col)
+bool
+MainWindow::checkForWin(int row, int col)
 {
     // Check horizontally
     if (checkDirection(row, col, 0, 1) || checkDirection(row, col, 0, -1))
@@ -93,35 +95,33 @@ bool MainWindow::checkForWin(int row, int col)
         return true;
 
     // Check diagonally
-    if (checkDirection(row, col, 1, 1) || checkDirection(row, col, -1, -1) ||
-        checkDirection(row, col, -1, 1) || checkDirection(row, col, 1, -1))
+    if (checkDirection(row, col, 1, 1) || checkDirection(row, col, -1, -1) || checkDirection(row, col, -1, 1) || checkDirection(row, col, 1, -1))
         return true;
 
     return false;
 }
 
-bool MainWindow::checkDirection(int row, int col, int xDir, int yDir)
+bool
+MainWindow::checkDirection(int row, int col, int xDir, int yDir)
 {
     int count = 1;
     int r, c;
 
-    for (int i = 1; i < 4; ++i)
-    {
+    for (int i = 1; i < 4; ++i) {
         r = row + i * xDir;
         c = col + i * yDir;
 
-        if (r >= 0 && r < GameConfig::numRows&& c >= 0 && c < GameConfig::numColumns&& buttons[r][c]->text() == QString::number(currentPlayer))
+        if (r >= 0 && r < GameConfig::numRows && c >= 0 && c < GameConfig::numColumns && buttons[r][c]->text() == QString::number(currentPlayer))
             count++;
         else
             break;
     }
 
-    for (int i = 1; i < 4; ++i)
-    {
+    for (int i = 1; i < 4; ++i) {
         r = row - i * xDir;
         c = col - i * yDir;
 
-        if (r >= 0 && r < GameConfig::numRows&& c >= 0 && c < GameConfig::numColumns&& buttons[r][c]->text() == QString::number(currentPlayer))
+        if (r >= 0 && r < GameConfig::numRows && c >= 0 && c < GameConfig::numColumns && buttons[r][c]->text() == QString::number(currentPlayer))
             count++;
         else
             break;

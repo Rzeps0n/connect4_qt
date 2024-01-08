@@ -5,18 +5,6 @@
 GameBoard::GameBoard(QWidget *parent) : QWidget(parent) {
 }
 
-QPoint GameBoard::calculatePosition(int column, int row) {
-    int width = this->width() / GameConfig::numColumns;
-    int height = this->height() / GameConfig::numRows;
-    int x = column * width;
-    int y = row * height;
-    return QPoint(x, y);
-}
-
-int GameBoard::calculateSquareSize() {
-    return qMin(this->width() / GameConfig::numColumns, this->height() / GameConfig::numRows);
-}
-
 void GameBoard::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     painter.setPen(Qt::black);
