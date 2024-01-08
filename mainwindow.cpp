@@ -1,20 +1,10 @@
 #include "mainwindow.h"
 
-#include <QPropertyAnimation>
-
-#include <QEasingCurve>
-
-#include <QAbstractAnimation>
-
-#include <QLabel>
-
-#include "GameConfig.h"
-
 MainWindow::MainWindow(QWidget* parent)
         : QMainWindow(parent)
         , currentPlayer(1)
 {
-    resize(800, 600);
+    resize(GameConfig::windowWidth, GameConfig::windowHeight);
     gameBoard = new GameBoard(this);
     setCentralWidget(gameBoard);
     connect(gameBoard, &GameBoard::columnClicked, this, &MainWindow::handleColumnClicked);
@@ -40,16 +30,10 @@ MainWindow::handleColumnClicked(int column)
     int columnWidth = this->width() / GameConfig::numColumns;
     int rowHeight = gameBoard->height() / GameConfig::numRows;
     int diameter = qMin(columnWidth, rowHeight) - (columnWidth / 5);
-    int tokenSpacing = columnWidth / 10;
-
     QPoint center = gameBoard->calculateCenter(column, row);
     QLabel* token = new QLabel(gameBoard);
     QString color = (currentPlayer == 1) ? "red" : "yellow";
     token->setStyleSheet(QString("QLabel { background-color: %1; }").arg(color));
-
-    int verticalPadding = columnWidth / 5;
-    int totalSpacing = (GameConfig::numRows - 1) * tokenSpacing + 2 * verticalPadding;
-
     token->setFixedSize(diameter, diameter);
     token->setStyleSheet(token->styleSheet() + QString(" QLabel { border-radius: %1px; }").arg(diameter / 2));
 
@@ -71,6 +55,37 @@ MainWindow::handleColumnClicked(int column)
 
     currentPlayer = (currentPlayer == 1) ? 2 : 1;
 }
+/*
+void MainWindow::resizeEvent(QResizeEvent *event) {
+    QMainWindow::resizeEvent(event);  // Call the base class implementation
+    updateTokenPositions();  // Update the position and size of all tokens
+}
+
+void MainWindow::updateTokenPositions() {
+    int cellWidth = gameBoard->width() / GameConfig::numColumns;
+    int cellHeight = gameBoard->height() / GameConfig::numRows;
+    int diameter = qMin(cellWidth, cellHeight) - (cellWidth / 10);  // Adjust the padding as necessary
+
+    for (int row = 0; row < GameConfig::numRows; ++row) {
+        for (int col = 0; col < GameConfig::numColumns; ++col) {`
+            QLabel* token = labels[row][col];
+            if (token) {  // If there is a token placed at this position
+                int centerX = (col * cellWidth) + (cellWidth / 2);
+                int centerY = (row * cellHeight) + (cellHeight / 2);
+
+                // Adjust the token's geometry to keep it centered within the cell
+                QRect newGeometry(centerX - diameter / 2, centerY - diameter / 2, diameter, diameter);
+                token->setGeometry(newGeometry);
+
+                // Update the border-radius to maintain the circular shape
+                token->setStyleSheet(QString("QLabel { background-color: %1; border-radius: %2px; }")
+                                             .arg(token->styleSheet().split(";").first().split(": ").last())
+                                             .arg(diameter / 2));
+            }
+        }
+    }
+}
+*/
 
 int
 MainWindow::findEmptyRow(int column)

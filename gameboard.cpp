@@ -1,6 +1,4 @@
 #include "gameboard.h"
-#include <QMouseEvent>
-#include "GameConfig.h"
 
 GameBoard::GameBoard(QWidget *parent) : QWidget(parent) {
 }
@@ -34,16 +32,17 @@ void GameBoard::mousePressEvent(QMouseEvent *event) {
 }
 
 int GameBoard::calculateDiameter() const {
-    int cellWidth = width() / GameConfig::numColumns;
-    int cellHeight = height() / GameConfig::numRows;
-    int padding = cellWidth / 10;
-    return qMin(cellWidth, cellHeight) - padding;
+    int columnWidth = width() / GameConfig::numColumns;
+    int rowHeight = height() / GameConfig::numRows;
+    int diameter = qMin(columnWidth, rowHeight) - (columnWidth / 5); // Maintain aspect ratio
+    return diameter;
 }
 
+
 QPoint GameBoard::calculateCenter(int column, int row) const {
-    int cellWidth = width() / GameConfig::numColumns;
-    int cellHeight = height() / GameConfig::numRows;
-    int centerX = (column * cellWidth) + (cellWidth / 2);
-    int centerY = (row * cellHeight) + (cellHeight / 2);
+    int columnWidth = width() / GameConfig::numColumns;
+    int rowHeight = height() / GameConfig::numRows;
+    int centerX = column * columnWidth + columnWidth / 2;
+    int centerY = row * rowHeight + rowHeight / 2;
     return QPoint(centerX, centerY);
 }

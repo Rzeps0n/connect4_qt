@@ -1,13 +1,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "GameConfig.h"
 #include "QLabel"
-#include "gameboard.h"
+#include <QApplication>
 #include <QGridLayout>
 #include <QMainWindow>
 #include <QPushButton>
 #include <QResizeEvent>
+#include <QPropertyAnimation>
+#include <QEasingCurve>
+#include <QAbstractAnimation>
+#include "gameboard.h"
+#include "GameConfig.h"
 
 class MainWindow : public QMainWindow
 {
@@ -21,12 +25,14 @@ private slots:
     void handleColumnClicked(int column);
 
 protected:
-    // void resizeEvent(QResizeEvent *event);
+    //void resizeEvent(QResizeEvent *event) override;
 
 private:
-    QLabel* labels[GameConfig::numRows][GameConfig::numColumns];
+
     GameBoard* gameBoard;
     QPushButton* buttons[GameConfig::numRows][GameConfig::numColumns];
+    QLabel* labels[GameConfig::numRows][GameConfig::numColumns];  // 2D array of pointers to QLabel tokens
+    void updateTokenPositions();  // Function to update the position and size of tokens
     int currentPlayer;
     int findEmptyRow(int column);
     bool checkForWin(int row, int col);
