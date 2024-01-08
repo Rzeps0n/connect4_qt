@@ -6,6 +6,8 @@
 #include <QGridLayout>
 #include <QResizeEvent>
 #include "gameboard.h"
+#include "GameConfig.h"
+#include "QLabel"
 
 class MainWindow : public QMainWindow
 {
@@ -18,22 +20,19 @@ public:
 
 private slots:
     void handleColumnClicked(int column);
-    //void showMainMenu();
 
 protected:
-    void resizeEvent(QResizeEvent *event) override;
+    //void resizeEvent(QResizeEvent *event);
 
 private:
+    QLabel* labels[GameConfig::numRows][GameConfig::numColumns];
     GameBoard *gameBoard;
     QGridLayout *gridLayout;
-    QPushButton *buttons[6][7];
+    QPushButton *buttons[GameConfig::numRows][GameConfig::numColumns];
     int currentPlayer;
     int findEmptyRow(int column);
-
-    void setupBoard();
     bool checkForWin(int row, int col);
     bool checkDirection(int row, int col, int xDir, int yDir);
-    //void showWinMessage(int player);
 };
 
 #endif // MAINWINDOW_H

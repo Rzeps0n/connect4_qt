@@ -328,6 +328,12 @@
 	"HEADERS" : 
 	[
 		[
+			"/Users/adam/projects/cpp/connect4-project/GameConfig.h",
+			"MU",
+			"EWIEGA46WW/moc_GameConfig.cpp",
+			null
+		],
+		[
 			"/Users/adam/projects/cpp/connect4-project/gameboard.h",
 			"MU",
 			"EWIEGA46WW/moc_gameboard.cpp",

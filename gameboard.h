@@ -17,6 +17,10 @@ protected:
 signals:
     void columnClicked(int column);
 
+public slots:
+    QPoint calculatePosition(int column, int row);
+    int calculateSquareSize();
+
 };
 
 #endif // GAMEBOARD_H

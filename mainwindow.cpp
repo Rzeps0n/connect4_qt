@@ -3,6 +3,8 @@
 #include <QEasingCurve>
 #include <QAbstractAnimation>
 #include <QLabel>
+#include "GameConfig.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent), currentPlayer(1)
@@ -12,86 +14,72 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(gameBoard);
 
     gridLayout = new QGridLayout(gameBoard);
-    setupBoard();
     connect(gameBoard, &GameBoard::columnClicked, this, &MainWindow::handleColumnClicked);
     setWindowTitle("Connect 4");
+
+    for (int row = 0; row < GameConfig::numRows; ++row) {
+        for (int col = 0; col < GameConfig::numColumns; ++col) {
+            labels[row][col] = nullptr;
+        }
+    }
 }
 
 MainWindow::~MainWindow()
 {
 }
 
-void MainWindow::setupBoard() {
-    int numColumns = 7;
-    int numRows = 6;
-
-    for (int row = 0; row < numRows; ++row) {
-        for (int col = 0; col < numColumns; ++col) {
-            buttons[row][col] = new QPushButton(this);
-
-            buttons[row][col]->setStyleSheet("QPushButton { background-color: lightgray; }");
-
-            connect(buttons[row][col], &QPushButton::clicked, this, [this, col] { handleColumnClicked(col); });
-
-            gridLayout->addWidget(buttons[row][col], row, col);
-        }
-    }
-}
-
-
-void MainWindow::resizeEvent(QResizeEvent *event)
-{
-    QMainWindow::resizeEvent(event);
-
-    int buttonSize = qMin(width() / 10, height() / 8);
-    for (int row = 0; row < 6; ++row)
-    {
-        for (int col = 0; col < 7; ++col)
-        {
-            buttons[row][col]->setFixedSize(buttonSize, buttonSize);
-        }
-    }
-}
-
 void MainWindow::handleColumnClicked(int column) {
     int row = findEmptyRow(column);
-    if (row < 0) return;
+    if (row < 0) {
+        qDebug() << "Column" << column << "is full!";
+        return;
+    }
 
-    int squareSize = qMin(gameBoard->width() / 7, gameBoard->height() / 6);
-
-    QLabel *token = new QLabel(this);
+    QLabel *token = new QLabel(gameBoard);
     QString color = (currentPlayer == 1) ? "red" : "yellow";
     token->setStyleSheet(QString("QLabel { background-color: %1; }").arg(color));
+
+    int squareSize = gameBoard->calculateSquareSize();
     token->setFixedSize(squareSize, squareSize);
 
-    int startX = column * squareSize;
-    int startY = 0;
-    int endY = row * squareSize;
+    int columnWidth = gameBoard->width() / GameConfig::numColumns;
+    int xCenterOfColumn = column * columnWidth + columnWidth / 2 - squareSize / 2;
 
-    token->move(startX, startY);
+    QPoint startPos = QPoint(xCenterOfColumn, 0);
+    token->move(startPos);
     token->show();
 
+    // Animate the token falling
     QPropertyAnimation *animation = new QPropertyAnimation(token, "geometry");
     animation->setDuration(500);
-    animation->setStartValue(token->geometry());
-    animation->setEndValue(QRect(startX, endY, token->width(), token->height()));
+    QPoint endPos = gameBoard->calculatePosition(column, row);
+    endPos.setX(xCenterOfColumn); // Adjust the x position to be centered
+    animation->setStartValue(QRect(startPos, token->size()));
+    animation->setEndValue(QRect(endPos, token->size()));
     animation->setEasingCurve(QEasingCurve::OutBounce);
+
     animation->start(QAbstractAnimation::DeleteWhenStopped);
 
-    if (checkForWin(row, column)) {
-        qDebug() << "Player " << currentPlayer << " wins!";
-    }
+    labels[row][column] = token;
 
     currentPlayer = (currentPlayer == 1) ? 2 : 1;
 }
+
 int MainWindow::findEmptyRow(int column) {
-    for (int row = 5; row >= 0; --row) {
-        if (buttons[row][column]->text() == "") {
+    if (column < 0 || column >= GameConfig::numColumns) {
+        qDebug() << "Column index out of bounds:" << column;
+        return -1;
+    }
+
+    for (int row = GameConfig::numRows - 1; row >= 0; --row) {
+        if (labels[row][column] == nullptr || labels[row][column]->text().isEmpty()) {
             return row;
         }
     }
-    return -1; // Indicate that the column is full
+
+    return -1; // Column is full
 }
+
 bool MainWindow::checkForWin(int row, int col)
 {
     // Check horizontally
@@ -120,7 +108,7 @@ bool MainWindow::checkDirection(int row, int col, int xDir, int yDir)
         r = row + i * xDir;
         c = col + i * yDir;
 
-        if (r >= 0 && r < 6 && c >= 0 && c < 7 && buttons[r][c]->text() == QString::number(currentPlayer))
+        if (r >= 0 && r < GameConfig::numRows&& c >= 0 && c < GameConfig::numColumns&& buttons[r][c]->text() == QString::number(currentPlayer))
             count++;
         else
             break;
@@ -131,7 +119,7 @@ bool MainWindow::checkDirection(int row, int col, int xDir, int yDir)
         r = row - i * xDir;
         c = col - i * yDir;
 
-        if (r >= 0 && r < 6 && c >= 0 && c < 7 && buttons[r][c]->text() == QString::number(currentPlayer))
+        if (r >= 0 && r < GameConfig::numRows&& c >= 0 && c < GameConfig::numColumns&& buttons[r][c]->text() == QString::number(currentPlayer))
             count++;
         else
             break;
