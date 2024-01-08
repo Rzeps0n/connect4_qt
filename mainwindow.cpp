@@ -1,21 +1,19 @@
-//
-// mainwindow.cpp
 #include "mainwindow.h"
 #include <QPropertyAnimation>
 #include <QEasingCurve>
 #include <QAbstractAnimation>
-#include <QDebug>
+#include <QLabel>
 
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent), currentPlayer(1)
 {
-    gridLayout = new QGridLayout;
+    resize(800, 600);
+    gameBoard = new GameBoard(this);
+    setCentralWidget(gameBoard);
+
+    gridLayout = new QGridLayout(gameBoard);
     setupBoard();
-
-    QWidget *centralWidget = new QWidget(this);
-    centralWidget->setLayout(gridLayout);
-    setCentralWidget(centralWidget);
-
+    connect(gameBoard, &GameBoard::columnClicked, this, &MainWindow::handleColumnClicked);
     setWindowTitle("Connect 4");
 }
 
@@ -23,23 +21,23 @@ MainWindow::~MainWindow()
 {
 }
 
-void MainWindow::setupBoard()
-{
-    for (int row = 0; row < 6; ++row)
-    {
-        for (int col = 0; col < 7; ++col)
-        {
+void MainWindow::setupBoard() {
+    int numColumns = 7;
+    int numRows = 6;
+
+    for (int row = 0; row < numRows; ++row) {
+        for (int col = 0; col < numColumns; ++col) {
             buttons[row][col] = new QPushButton(this);
 
-            buttons[row][col]->setStyleSheet("QPushButton { border-radius: 30px; background-color: lightgray; }");
+            buttons[row][col]->setStyleSheet("QPushButton { background-color: lightgray; }");
 
-            buttons[row][col]->setFixedSize(60, 60);
+            connect(buttons[row][col], &QPushButton::clicked, this, [this, col] { handleColumnClicked(col); });
 
-            connect(buttons[row][col], &QPushButton::clicked, this, &MainWindow::handleButtonClicked);
             gridLayout->addWidget(buttons[row][col], row, col);
         }
     }
 }
+
 
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
@@ -55,50 +53,45 @@ void MainWindow::resizeEvent(QResizeEvent *event)
     }
 }
 
-void MainWindow::handleButtonClicked()
-{
-    QPushButton *clickedButton = qobject_cast<QPushButton *>(sender());
+void MainWindow::handleColumnClicked(int column) {
+    int row = findEmptyRow(column);
+    if (row < 0) return;
 
-    for (int col = 0; col < 7; ++col)
-    {
-        if (buttons[0][col] == clickedButton)
-        {
-            qDebug() << "Clicked col:" << col << "by Player:" << currentPlayer;
-            int row = 5;
-            while (row >= 0 && buttons[row][col]->text() != "")
-            {
-                --row;
-            }
+    int squareSize = qMin(gameBoard->width() / 7, gameBoard->height() / 6);
 
-            if (row < 0)
-                return;
+    QLabel *token = new QLabel(this);
+    QString color = (currentPlayer == 1) ? "red" : "yellow";
+    token->setStyleSheet(QString("QLabel { background-color: %1; }").arg(color));
+    token->setFixedSize(squareSize, squareSize);
 
-            QString color = (currentPlayer == 1) ? "red" : "yellow";
-            buttons[row][col]->setStyleSheet(QString("QPushButton { border-radius: 30px; background-color: %1; }").arg(color));
+    int startX = column * squareSize;
+    int startY = 0;
+    int endY = row * squareSize;
 
-            // Set button text to mark the player
-            buttons[row][col]->setText(QString::number(currentPlayer));
+    token->move(startX, startY);
+    token->show();
 
-            // Animate falling token
-            QPropertyAnimation *animation = new QPropertyAnimation(buttons[row][col], "geometry");
-            animation->setDuration(500);
-            animation->setStartValue(QRect(buttons[row][col]->geometry().topLeft(), buttons[row][col]->size()));
-            animation->setEndValue(QRect(buttons[row][col]->geometry().topLeft() + QPoint(0, 60 * (5 - row)), buttons[row][col]->size()));
-            animation->setEasingCurve(QEasingCurve::OutBounce);
-            animation->start(QAbstractAnimation::DeleteWhenStopped);
+    QPropertyAnimation *animation = new QPropertyAnimation(token, "geometry");
+    animation->setDuration(500);
+    animation->setStartValue(token->geometry());
+    animation->setEndValue(QRect(startX, endY, token->width(), token->height()));
+    animation->setEasingCurve(QEasingCurve::OutBounce);
+    animation->start(QAbstractAnimation::DeleteWhenStopped);
 
-            if (checkForWin(row, col))
-            {
-                qDebug() << "Player " << currentPlayer << " wins!";
-            }
+    if (checkForWin(row, column)) {
+        qDebug() << "Player " << currentPlayer << " wins!";
+    }
 
-            currentPlayer = (currentPlayer == 1) ? 2 : 1;
-            return;
+    currentPlayer = (currentPlayer == 1) ? 2 : 1;
+}
+int MainWindow::findEmptyRow(int column) {
+    for (int row = 5; row >= 0; --row) {
+        if (buttons[row][column]->text() == "") {
+            return row;
         }
     }
+    return -1; // Indicate that the column is full
 }
-
-
 bool MainWindow::checkForWin(int row, int col)
 {
     // Check horizontally

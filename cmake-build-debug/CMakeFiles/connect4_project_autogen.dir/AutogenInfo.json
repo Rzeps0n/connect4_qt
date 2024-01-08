@@ -328,6 +328,12 @@
 	"HEADERS" : 
 	[
 		[
+			"/Users/adam/projects/cpp/connect4-project/gameboard.h",
+			"MU",
+			"EWIEGA46WW/moc_gameboard.cpp",
+			null
+		],
+		[
 			"/Users/adam/projects/cpp/connect4-project/mainwindow.h",
 			"MU",
 			"EWIEGA46WW/moc_mainwindow.cpp",
@@ -391,6 +397,7 @@
 	"SETTINGS_FILE" : "/Users/adam/projects/cpp/connect4-project/cmake-build-debug/CMakeFiles/connect4_project_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[ "/Users/adam/projects/cpp/connect4-project/gameboard.cpp", "MU", null ],
 		[ "/Users/adam/projects/cpp/connect4-project/main.cpp", "MU", null ],
 		[
 			"/Users/adam/projects/cpp/connect4-project/mainwindow.cpp",
