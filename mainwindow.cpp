@@ -32,53 +32,56 @@ void MainWindow::handleColumnClicked(int column) {
     int row = findEmptyRow(column);
     if (row < 0) {
         qDebug() << "Column" << column << "is full!";
-        return;
+        return; // Column is full
     }
 
     QLabel *token = new QLabel(gameBoard);
     QString color = (currentPlayer == 1) ? "red" : "yellow";
     token->setStyleSheet(QString("QLabel { background-color: %1; }").arg(color));
 
-    int squareSize = gameBoard->calculateSquareSize();
-    token->setFixedSize(squareSize, squareSize);
-
     int columnWidth = gameBoard->width() / GameConfig::numColumns;
-    int xCenterOfColumn = column * columnWidth + columnWidth / 2 - squareSize / 2;
+    int tokenSpacing = columnWidth/10;
+    int totalSpacing = (GameConfig::numRows - 1) * tokenSpacing;
+    int availableHeight = gameBoard->height() - totalSpacing;
+    int heightPerToken = availableHeight / GameConfig::numRows;
+    int xCenterOfColumn = column * columnWidth + columnWidth / 2 - heightPerToken / 2;
 
-    QPoint startPos = QPoint(xCenterOfColumn, 0);
+
+    token->setFixedSize(heightPerToken, heightPerToken);
+
+    QPoint startPos = QPoint(xCenterOfColumn, 0); // Start position at the top of the column
     token->move(startPos);
     token->show();
+
+    int yEndPosition = row * (heightPerToken + tokenSpacing);
 
     // Animate the token falling
     QPropertyAnimation *animation = new QPropertyAnimation(token, "geometry");
     animation->setDuration(500);
-    QPoint endPos = gameBoard->calculatePosition(column, row);
-    endPos.setX(xCenterOfColumn); // Adjust the x position to be centered
+    QPoint endPos = QPoint(xCenterOfColumn, yEndPosition);
     animation->setStartValue(QRect(startPos, token->size()));
     animation->setEndValue(QRect(endPos, token->size()));
     animation->setEasingCurve(QEasingCurve::OutBounce);
-
     animation->start(QAbstractAnimation::DeleteWhenStopped);
 
+    // Store the token in the labels array
     labels[row][column] = token;
 
+    // Update game logic here
     currentPlayer = (currentPlayer == 1) ? 2 : 1;
 }
 
-int MainWindow::findEmptyRow(int column) {
-    if (column < 0 || column >= GameConfig::numColumns) {
-        qDebug() << "Column index out of bounds:" << column;
-        return -1;
-    }
 
+
+int MainWindow::findEmptyRow(int column) {
     for (int row = GameConfig::numRows - 1; row >= 0; --row) {
-        if (labels[row][column] == nullptr || labels[row][column]->text().isEmpty()) {
+        if (labels[row][column] == nullptr) {
             return row;
         }
     }
-
-    return -1; // Column is full
+    return -1; // No empty row found, column is full
 }
+
 
 bool MainWindow::checkForWin(int row, int col)
 {
