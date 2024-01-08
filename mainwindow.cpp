@@ -34,40 +34,39 @@ void MainWindow::handleColumnClicked(int column) {
         qDebug() << "Column" << column << "is full!";
         return; // Column is full
     }
+    int columnWidth = this->width() / GameConfig::numColumns;
+    int rowHeight = gameBoard->height() / GameConfig::numRows;
+    int diameter = qMin(columnWidth, rowHeight) - (columnWidth / 5);
+    int tokenSpacing = columnWidth / 10;
 
+    QPoint center = gameBoard->calculateCenter(column, row);
     QLabel *token = new QLabel(gameBoard);
     QString color = (currentPlayer == 1) ? "red" : "yellow";
     token->setStyleSheet(QString("QLabel { background-color: %1; }").arg(color));
 
-    int columnWidth = gameBoard->width() / GameConfig::numColumns;
-    int tokenSpacing = columnWidth/10;
-    int totalSpacing = (GameConfig::numRows - 1) * tokenSpacing;
-    int availableHeight = gameBoard->height() - totalSpacing;
-    int heightPerToken = availableHeight / GameConfig::numRows;
-    int xCenterOfColumn = column * columnWidth + columnWidth / 2 - heightPerToken / 2;
+    int verticalPadding = columnWidth / 5;
+    int totalSpacing = (GameConfig::numRows - 1) * tokenSpacing + 2 * verticalPadding;
 
+    token->setFixedSize(diameter, diameter);
+    token->setStyleSheet(token->styleSheet() + QString(" QLabel { border-radius: %1px; }").arg(diameter / 2));
 
-    token->setFixedSize(heightPerToken, heightPerToken);
+    QPoint startPos = center - QPoint(diameter / 2, gameBoard->height());
+    QPoint endPos = center - QPoint(diameter / 2, diameter / 2);
 
-    QPoint startPos = QPoint(xCenterOfColumn, 0); // Start position at the top of the column
     token->move(startPos);
     token->show();
 
-    int yEndPosition = row * (heightPerToken + tokenSpacing);
 
     // Animate the token falling
     QPropertyAnimation *animation = new QPropertyAnimation(token, "geometry");
     animation->setDuration(500);
-    QPoint endPos = QPoint(xCenterOfColumn, yEndPosition);
     animation->setStartValue(QRect(startPos, token->size()));
     animation->setEndValue(QRect(endPos, token->size()));
     animation->setEasingCurve(QEasingCurve::OutBounce);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
 
-    // Store the token in the labels array
     labels[row][column] = token;
 
-    // Update game logic here
     currentPlayer = (currentPlayer == 1) ? 2 : 1;
 }
 

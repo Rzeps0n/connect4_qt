@@ -22,25 +22,40 @@ void GameBoard::paintEvent(QPaintEvent *event) {
     painter.setPen(Qt::black);
     painter.setBrush(Qt::lightGray);
 
-    int columnWidth = this->width() / GameConfig::numColumns;
-    int rowHeight = this->height() / GameConfig::numRows;
+    int diameter = calculateDiameter();
+    int cellWidth = width() / GameConfig::numColumns;
 
-   /* for (int row = 0; row < GameConfig::numRows; ++row) {
+    for (int row = 0; row < GameConfig::numRows; ++row) {
         for (int col = 0; col < GameConfig::numColumns; ++col) {
-            int x = col * columnWidth;
-            int y = row * rowHeight;
-            painter.drawRect(x, y, columnWidth, rowHeight);  // Draw a rectangle with the top-left corner at (x, y)
+            QPoint center = calculateCenter(col, row);
+            painter.drawEllipse(center, diameter / 2, diameter / 2);
         }
-    }*/
+    }
 
+    // Draw vertical lines
     for (int col = 1; col < GameConfig::numColumns; col++) {
-        int x = col * columnWidth;
-        painter.drawLine(x, 0, x, this->height());
+        int x = col * cellWidth;
+        painter.drawLine(x, 0, x, height());
     }
 }
 
 void GameBoard::mousePressEvent(QMouseEvent *event) {
-    int columnWidth = width() / GameConfig::numColumns;
-    int clickedColumn = event->x() / columnWidth;
+    int columnWidth = this->width() / GameConfig::numColumns;
+    int clickedColumn = event->position().x() / columnWidth;
     emit columnClicked(clickedColumn);
+}
+
+int GameBoard::calculateDiameter() const {
+    int cellWidth = width() / GameConfig::numColumns;
+    int cellHeight = height() / GameConfig::numRows;
+    int padding = cellWidth / 10;
+    return qMin(cellWidth, cellHeight) - padding;
+}
+
+QPoint GameBoard::calculateCenter(int column, int row) const {
+    int cellWidth = width() / GameConfig::numColumns;
+    int cellHeight = height() / GameConfig::numRows;
+    int centerX = (column * cellWidth) + (cellWidth / 2);
+    int centerY = (row * cellHeight) + (cellHeight / 2);
+    return QPoint(centerX, centerY);
 }
