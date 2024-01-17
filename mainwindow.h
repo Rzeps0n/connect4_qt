@@ -1,38 +1,36 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "GameConfig.h"
 #include "QLabel"
+#include "gameboard.h"
+#include <QAbstractAnimation>
 #include <QApplication>
+#include <QEasingCurve>
 #include <QGridLayout>
 #include <QMainWindow>
+#include <QPropertyAnimation>
 #include <QPushButton>
 #include <QResizeEvent>
-#include <QPropertyAnimation>
-#include <QEasingCurve>
-#include <QAbstractAnimation>
-#include "gameboard.h"
-#include "GameConfig.h"
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
 Q_OBJECT
 
 public:
-    MainWindow(QWidget* parent = nullptr);
+    MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
     void handleColumnClicked(int column);
 
 protected:
-    //void resizeEvent(QResizeEvent *event) override;
+    // void resizeEvent(QResizeEvent *event) override;
 
 private:
-
-    GameBoard* gameBoard;
-    QPushButton* buttons[GameConfig::numRows][GameConfig::numColumns];
-    QLabel* labels[GameConfig::numRows][GameConfig::numColumns];  // 2D array of pointers to QLabel tokens
-    void updateTokenPositions();  // Function to update the position and size of tokens
+    GameBoard *gameBoard;
+    QPushButton *buttons[GameConfig::numRows][GameConfig::numColumns];
+    QLabel *labels[GameConfig::numRows][GameConfig::numColumns];
+    void updateTokenPositions();
     int currentPlayer;
     int findEmptyRow(int column);
     bool checkForWin(int row, int col);

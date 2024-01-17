@@ -12,6 +12,7 @@ int main(int argc, char *argv[]) {
     QDialog startMenu;
     startMenu.setWindowTitle("Start Menu");
     startMenu.resize(GameConfig::windowWidth, GameConfig::windowHeight);
+    startMenu.setStyleSheet(QString("background-color: %1;").arg(GameConfig::backgroundColor));
 
     // Create buttons
     QPushButton startButton("Start Game");
@@ -19,7 +20,15 @@ int main(int argc, char *argv[]) {
     QPushButton quitButton("Quit Game");
 
     // Set button styles to be larger and square
-    QString buttonStyle = "QPushButton { font-size: 20px; min-width: 200px; min-height: 50px; }";
+    QString buttonStyle = QString(
+            "QPushButton { "
+            "font-size: 20px; "
+            "min-width: 200px; "
+            "min-height: 50px; "
+            "background-color: %1; "
+            "color: %2; "
+            "}"
+    ).arg(GameConfig::buttonColor, GameConfig::buttonTextColor);
     startButton.setStyleSheet(buttonStyle);
     settingsButton.setStyleSheet(buttonStyle);
     quitButton.setStyleSheet(buttonStyle);

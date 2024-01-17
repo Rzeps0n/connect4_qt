@@ -1,10 +1,10 @@
 #ifndef GAMEBOARD_H
 #define GAMEBOARD_H
 
-#include <QWidget>
-#include <QPainter>
-#include <QMouseEvent>
 #include "GameConfig.h"
+#include <QMouseEvent>
+#include <QPainter>
+#include <QWidget>
 
 class GameBoard : public QWidget {
 Q_OBJECT

@@ -1,12 +1,16 @@
 #include "gameboard.h"
 
-GameBoard::GameBoard(QWidget *parent) : QWidget(parent) {
-}
+GameBoard::GameBoard(QWidget *parent) : QWidget(parent) {}
 
 void GameBoard::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
-    painter.setPen(Qt::black);
-    painter.setBrush(Qt::lightGray);
+
+    QColor backgroundColor = QColor(GameConfig::backgroundColor);
+    QColor tokenBackgroundColor = QColor(GameConfig::tokenBackgroundColor);
+    QColor lineColor =
+            QColor(GameConfig::buttonTextColor); // Color for the vertical lines
+
+    painter.setPen(backgroundColor);
 
     int diameter = calculateDiameter();
     int cellWidth = width() / GameConfig::numColumns;
@@ -14,9 +18,13 @@ void GameBoard::paintEvent(QPaintEvent *event) {
     for (int row = 0; row < GameConfig::numRows; ++row) {
         for (int col = 0; col < GameConfig::numColumns; ++col) {
             QPoint center = calculateCenter(col, row);
+            painter.setBrush(tokenBackgroundColor);
             painter.drawEllipse(center, diameter / 2, diameter / 2);
         }
     }
+    QPen linePen(lineColor);
+    linePen.setWidth(3); // Set the line width as needed
+    painter.setPen(linePen);
 
     // Draw vertical lines
     for (int col = 1; col < GameConfig::numColumns; col++) {
@@ -34,10 +42,9 @@ void GameBoard::mousePressEvent(QMouseEvent *event) {
 int GameBoard::calculateDiameter() const {
     int columnWidth = width() / GameConfig::numColumns;
     int rowHeight = height() / GameConfig::numRows;
-    int diameter = qMin(columnWidth, rowHeight) - (columnWidth / 5); // Maintain aspect ratio
+    int diameter = qMin(columnWidth, rowHeight) - (columnWidth / 5);
     return diameter;
 }
-
 
 QPoint GameBoard::calculateCenter(int column, int row) const {
     int columnWidth = width() / GameConfig::numColumns;
