@@ -2,24 +2,31 @@
 #include <QDialog>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include <QMessageBox>
 #include "mainwindow.h"
 #include "GameConfig.h"
+#include "SettingsDialog.h"
+
+void showStartMenu(QApplication& app);
 
 int main(int argc, char *argv[]) {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
 
+    showStartMenu(app);
+
+    return app.exec();
+}
+
+void showStartMenu(QApplication& app) {
     QDialog startMenu;
     startMenu.setWindowTitle("Start Menu");
     startMenu.resize(GameConfig::windowWidth, GameConfig::windowHeight);
-    startMenu.setStyleSheet(QString("background-color: %1;").arg(GameConfig::backgroundColor));
 
     // Create buttons
-    QPushButton startButton("Start Game");
-    QPushButton settingsButton("Settings");
-    QPushButton quitButton("Quit Game");
+    QPushButton startButton("Start Game", &startMenu);
+    QPushButton settingsButton("Settings", &startMenu);
+    QPushButton quitButton("Quit Game", &startMenu);
 
-    // Set button styles to be larger and square
+    // Set button styles
     QString buttonStyle = QString(
             "QPushButton { "
             "font-size: 20px; "
@@ -33,26 +40,24 @@ int main(int argc, char *argv[]) {
     settingsButton.setStyleSheet(buttonStyle);
     quitButton.setStyleSheet(buttonStyle);
 
-    // Set up layout for the dialog
     QVBoxLayout layout;
     layout.addWidget(&startButton);
     layout.addWidget(&settingsButton);
     layout.addWidget(&quitButton);
     startMenu.setLayout(&layout);
 
-    QObject::connect(&startButton, &QPushButton::clicked, &startMenu, &QDialog::accept);
-
-    QObject::connect(&settingsButton, &QPushButton::clicked, []() {
-        QMessageBox::information(nullptr, "Settings", "Settings go here.");
+    QObject::connect(&startButton, &QPushButton::clicked, [&]() {
+        startMenu.close();
+        MainWindow* mainWindow = new MainWindow();
+        mainWindow->show();
     });
 
-    QObject::connect(&quitButton, &QPushButton::clicked, &startMenu, &QDialog::reject);
+    QObject::connect(&settingsButton, &QPushButton::clicked, [&]() {
+        SettingsDialog settingsDialog;
+        settingsDialog.exec();
+    });
 
-    if (startMenu.exec() == QDialog::Accepted) {
-        MainWindow mainWindow;
-        mainWindow.show();
-        return a.exec();
-    } else {
-        return 0;
-    }
+    QObject::connect(&quitButton, &QPushButton::clicked, &app, &QApplication::exit);
+
+    startMenu.exec();
 }

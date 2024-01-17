@@ -12,29 +12,28 @@
 #include <QPropertyAnimation>
 #include <QPushButton>
 #include <QResizeEvent>
+#include "WinDialog.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr, std::function<void()> showMenuCallback = nullptr);
     ~MainWindow();
 
 private slots:
     void handleColumnClicked(int column);
-
-protected:
-    // void resizeEvent(QResizeEvent *event) override;
+    void showWinDialog();
 
 private:
+    std::function<void()> showMainMenuCallback;
     GameBoard *gameBoard;
-    QPushButton *buttons[GameConfig::numRows][GameConfig::numColumns];
     QLabel *labels[GameConfig::numRows][GameConfig::numColumns];
-    void updateTokenPositions();
     int currentPlayer;
     int findEmptyRow(int column);
-    bool checkForWin(int row, int col);
-    bool checkDirection(int row, int col, int xDir, int yDir);
+    bool checkForWin(int row, int column);
+    bool checkLine(const QString& color, int startRow, int startCol, int deltaY, int deltaX);
+
 };
 
 #endif // MAINWINDOW_H

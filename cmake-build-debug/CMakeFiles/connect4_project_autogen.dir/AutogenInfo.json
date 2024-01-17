@@ -334,6 +334,18 @@
 			null
 		],
 		[
+			"/Users/adam/projects/cpp/connect4-project/SettingsDialog.h",
+			"MU",
+			"EWIEGA46WW/moc_SettingsDialog.cpp",
+			null
+		],
+		[
+			"/Users/adam/projects/cpp/connect4-project/WinDialog.h",
+			"MU",
+			"EWIEGA46WW/moc_WinDialog.cpp",
+			null
+		],
+		[
 			"/Users/adam/projects/cpp/connect4-project/gameboard.h",
 			"MU",
 			"EWIEGA46WW/moc_gameboard.cpp",
@@ -403,6 +415,12 @@
 	"SETTINGS_FILE" : "/Users/adam/projects/cpp/connect4-project/cmake-build-debug/CMakeFiles/connect4_project_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"/Users/adam/projects/cpp/connect4-project/SettingsDialog.cpp",
+			"MU",
+			null
+		],
+		[ "/Users/adam/projects/cpp/connect4-project/WinDialog.cpp", "MU", null ],
 		[ "/Users/adam/projects/cpp/connect4-project/gameboard.cpp", "MU", null ],
 		[ "/Users/adam/projects/cpp/connect4-project/main.cpp", "MU", null ],
 		[

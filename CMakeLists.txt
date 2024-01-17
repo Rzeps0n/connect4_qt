@@ -9,6 +9,6 @@ set(CMAKE_AUTOUIC ON)
 
 find_package(Qt6 COMPONENTS Widgets REQUIRED Core)
 
-add_executable(connect4_project main.cpp mainwindow.cpp gameboard.h gameboard.cpp GameConfig.h)
+add_executable(connect4_project main.cpp mainwindow.cpp gameboard.h gameboard.cpp GameConfig.h SettingsDialog.h SettingsDialog.cpp WinDialog.h WinDialog.cpp)
 
 target_link_libraries(connect4_project PRIVATE Qt6::Widgets Qt6::Core)

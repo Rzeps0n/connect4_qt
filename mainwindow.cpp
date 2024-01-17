@@ -1,14 +1,13 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-        : QMainWindow(parent), currentPlayer(1) {
-    resize(GameConfig::windowWidth, GameConfig::windowHeight);
+MainWindow::MainWindow(QWidget *parent, std::function<void()> showMenuCallback)
+        : QMainWindow(parent), showMainMenuCallback(showMenuCallback) {
     gameBoard = new GameBoard(this);
     setCentralWidget(gameBoard);
-    connect(gameBoard, &GameBoard::columnClicked, this,
-            &MainWindow::handleColumnClicked);
-    this->setStyleSheet(QString("background-color: %1;")
-                                .arg(GameConfig::mainWindowBackgroundColor));
+    this->setStyleSheet(QString("background-color: %1;").arg(GameConfig::mainWindowBackgroundColor));
+    this->setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
+    setFixedSize(GameConfig::windowWidth, GameConfig::windowHeight);
+    connect(gameBoard, &GameBoard::columnClicked, this,&MainWindow::handleColumnClicked);
     setWindowTitle("Connect 4");
 
     for (int row = 0; row < GameConfig::numRows; ++row) {
@@ -55,7 +54,39 @@ void MainWindow::handleColumnClicked(int column) {
 
     labels[row][column] = token;
 
+    if (checkForWin(row, column)) {
+        qDebug() << "Player:" << currentPlayer << "has won!";
+        WinDialog winDialog(this);
+        winDialog.setWinner(currentPlayer);
+        winDialog.exec();
+    }
+
     currentPlayer = (currentPlayer == 1) ? 2 : 1;
+}
+// Assuming this function is called when you need to show the win dialog
+void MainWindow::showWinDialog() {
+    // Define the actions for the rematch and return to main menu
+    auto onRematch = [this]() {
+        qDebug() << "Rematch button clicked";
+        // Logic for rematch
+        this->close();
+        MainWindow *newGame = new MainWindow();
+        newGame->show();
+    };
+
+    auto onReturnToMainMenu = [this]() {
+        qDebug() << "Return to Main Menu button clicked";
+        // Logic for returning to the main menu
+        this->close();
+        if (showMainMenuCallback) {
+            showMainMenuCallback();
+        }
+    };
+
+    // Create and show the win dialog with the defined actions
+    WinDialog winDialog(this, onRematch, onReturnToMainMenu);
+    winDialog.setWinner(currentPlayer); // Assuming setWinner is correctly defined in WinDialog
+    winDialog.exec();
 }
 
 int MainWindow::findEmptyRow(int column) {
@@ -67,50 +98,56 @@ int MainWindow::findEmptyRow(int column) {
     return -1; // No empty row found, column is full
 }
 
-bool MainWindow::checkForWin(int row, int col) {
-    // Check horizontally
-    if (checkDirection(row, col, 0, 1) || checkDirection(row, col, 0, -1))
-        return true;
+bool MainWindow::checkForWin(int row, int column) {
+    QString lastTokenColor = labels[row][column]->styleSheet();
 
-    // Check vertically
-    if (checkDirection(row, col, 1, 0))
-        return true;
+    // Check horizontal
+    for (int col = 0; col < GameConfig::numColumns - 3; col++) {
+        if (checkLine(lastTokenColor, row, col, 0, 1)) {
+            return true;
+        }
+    }
 
-    // Check diagonally
-    if (checkDirection(row, col, 1, 1) || checkDirection(row, col, -1, -1) ||
-        checkDirection(row, col, -1, 1) || checkDirection(row, col, 1, -1))
-        return true;
+    // Check vertical
+    for (int row = 0; row < GameConfig::numRows - 3; row++) {
+        if (checkLine(lastTokenColor, row, column, 1, 0)) {
+            return true;
+        }
+    }
+
+    // Check diagonal
+    for (int row = 3; row < GameConfig::numRows; row++) {
+        for (int col = 0; col < GameConfig::numColumns - 3; col++) {
+            if (checkLine(lastTokenColor, row, col, -1, 1)) {
+                return true;
+            }
+        }
+    }
+
+    // Check diagonal
+    for (int row = 0; row < GameConfig::numRows - 3; row++) {
+        for (int col = 0; col < GameConfig::numColumns - 3; col++) {
+            if (checkLine(lastTokenColor, row, col, 1, 1)) {
+                return true;
+            }
+        }
+    }
 
     return false;
 }
 
-bool MainWindow::checkDirection(int row, int col, int xDir, int yDir) {
-    int count = 1;
-    int r, c;
+bool MainWindow::checkLine(const QString& color, int startRow, int startCol, int deltaY, int deltaX) {
+    for (int i = 0; i < 4; i++) {
+        int row = startRow + i * deltaY;
+        int col = startCol + i * deltaX;
+        if (row < 0 || row >= GameConfig::numRows || col < 0 || col >= GameConfig::numColumns) {
+            return false;
+        }
 
-    for (int i = 1; i < 4; ++i) {
-        r = row + i * xDir;
-        c = col + i * yDir;
-
-        if (r >= 0 && r < GameConfig::numRows && c >= 0 &&
-            c < GameConfig::numColumns &&
-            buttons[r][c]->text() == QString::number(currentPlayer))
-            count++;
-        else
-            break;
+        QLabel *label = labels[row][col];
+        if (label == nullptr || label->styleSheet() != color) {
+            return false;
+        }
     }
-
-    for (int i = 1; i < 4; ++i) {
-        r = row - i * xDir;
-        c = col - i * yDir;
-
-        if (r >= 0 && r < GameConfig::numRows && c >= 0 &&
-            c < GameConfig::numColumns &&
-            buttons[r][c]->text() == QString::number(currentPlayer))
-            count++;
-        else
-            break;
-    }
-
-    return count >= 4;
+    return true;
 }

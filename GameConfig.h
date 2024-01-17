@@ -15,7 +15,6 @@ namespace GameConfig {
     const QString buttonColor = "#f0f0f0";
     const QString buttonTextColor = "#000000";
     const QString mainWindowBackgroundColor = "graphite";
-
-} // namespace GameConfig
+}
 
 #endif // GAMECONFIG_H
