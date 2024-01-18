@@ -734,7 +734,6 @@ connect4_project_autogen/timestamp: \
 	/Users/adam/projects/cpp/connect4-project/cmake-build-debug/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake \
 	/Users/adam/projects/cpp/connect4-project/cmake-build-debug/CMakeFiles/3.23.2/CMakeSystem.cmake \
 	/Users/adam/projects/cpp/connect4-project/cmake-build-debug/connect4_project_autogen/moc_predefs.h \
-	/Users/adam/projects/cpp/connect4-project/gameboard.h \
 	/Users/adam/projects/cpp/connect4-project/main.cpp \
 	/Users/adam/projects/cpp/connect4-project/menu.cpp \
 	/Users/adam/projects/cpp/connect4-project/menu.h \

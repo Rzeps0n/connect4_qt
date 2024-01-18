@@ -168,7 +168,7 @@ build connect4_project_autogen/timestamp connect4_project_autogen/mocs_compilati
 #############################################
 # Phony custom command for CMakeFiles/connect4_project_autogen_timestamp_deps
 
-build CMakeFiles/connect4_project_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/connect4_project_autogen_timestamp_deps: phony /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets /opt/homebrew/share/qt/libexec/moc /opt/homebrew/share/qt/libexec/uic
+build CMakeFiles/connect4_project_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/connect4_project_autogen_timestamp_deps: phony /opt/homebrew/share/qt/libexec/moc /opt/homebrew/share/qt/libexec/uic /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore
 
 
 #############################################

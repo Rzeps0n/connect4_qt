@@ -5218,7 +5218,7 @@
 /Users/adam/projects/cpp/connect4-project/menu.h
 /Users/adam/projects/cpp/connect4-project/GameBoard.h
  mmc:Q_OBJECT
- mdp:/Users/adam/projects/cpp/connect4-project/gameboard.h
+ mdp:/Users/adam/projects/cpp/connect4-project/GameBoard.h
  mdp:/Users/adam/projects/cpp/connect4-project/cmake-build-debug/connect4_project_autogen/moc_predefs.h
  mdp:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h
  mdp:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h

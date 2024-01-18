@@ -1,4 +1,4 @@
-/Users/adam/projects/cpp/connect4-project/cmake-build-debug/connect4_project_autogen/EWIEGA46WW/moc_gameboard.cpp: /Users/adam/projects/cpp/connect4-project/gameboard.h \
+/Users/adam/projects/cpp/connect4-project/cmake-build-debug/connect4_project_autogen/EWIEGA46WW/moc_GameBoard.cpp: /Users/adam/projects/cpp/connect4-project/GameBoard.h \
   /Users/adam/projects/cpp/connect4-project/cmake-build-debug/connect4_project_autogen/moc_predefs.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h \

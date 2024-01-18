@@ -12,6 +12,19 @@ WinDialog::WinDialog(QWidget *parent, std::function<void()> onRematchCallback, s
     rematchButton = new QPushButton(tr("Rematch"), this);
     returnToMainMenuButton = new QPushButton(tr("Return to Main Menu"), this);
 
+    QString buttonStyle = QString(
+            "QPushButton { "
+            "font-size: 20px; "
+            "min-width: 200px; "
+            "min-height: 50px; "
+            "background-color: %1; "
+            "color: %2; "
+            "}"
+    ).arg(GameConfig::buttonColor, GameConfig::buttonTextColor);
+
+    rematchButton->setStyleSheet(buttonStyle);
+    returnToMainMenuButton->setStyleSheet(buttonStyle);
+
     layout->addWidget(messageLabel);
 
     QHBoxLayout *buttonsLayout = new QHBoxLayout();
@@ -36,7 +49,12 @@ void WinDialog::setWinner(int playerNumber) {
 
     if (messageLabel) {
         messageLabel->setText(tr("Player %1 Wins!").arg(playerNumber));
-        messageLabel->setStyleSheet(QString("color: %1;").arg(playerColor));
+        messageLabel->setStyleSheet(QString(
+                "QLabel { "
+                "color: %1; "
+                "font-size: 20px; "
+                "}"
+        ).arg(playerColor));
     }
 }
 
