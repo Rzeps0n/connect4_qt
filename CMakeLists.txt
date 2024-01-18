@@ -10,6 +10,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 find_package(Qt6 COMPONENTS Widgets REQUIRED Core)
 
-add_executable(connect4_project main.cpp MainWindow.cpp GameBoard.h GameBoard.cpp GameConfig.h SettingsDialog.h SettingsDialog.cpp WinDialog.h WinDialog.cpp menu.h menu.cpp GameConfig.cpp)
+add_executable(Connect4 main.cpp MainWindow.cpp GameBoard.h GameBoard.cpp GameConfig.h SettingsDialog.h SettingsDialog.cpp WinDialog.h WinDialog.cpp menu.h menu.cpp GameConfig.cpp)
 
-target_link_libraries(connect4_project PRIVATE Qt6::Widgets Qt6::Core)
+target_link_libraries(Connect4 PRIVATE Qt6::Widgets Qt6::Core)
