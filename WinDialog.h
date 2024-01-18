@@ -4,9 +4,6 @@
 #include "GameConfig.h"
 #include <QDialog>
 #include <QLabel>
-#include <QPushButton>
-#include <QHBoxLayout>
-#include <functional>
 
 class WinDialog : public QDialog {
 Q_OBJECT

@@ -2,8 +2,7 @@
 #define MAINWINDOW_H
 
 #include "GameConfig.h"
-#include "QLabel"
-#include "gameboard.h"
+#include "GameBoard.h"
 #include <QAbstractAnimation>
 #include <QApplication>
 #include <QEasingCurve>

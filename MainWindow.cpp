@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent, std::function<void()> showMenuCallback)
         : QMainWindow(parent), showMainMenuCallback(showMenuCallback) {
@@ -64,14 +64,12 @@ void MainWindow::handleColumnClicked(int column) {
 
 void MainWindow::showWinDialog() {
     auto onRematch = [this]() {
-        qDebug() << "Inside MainWindow onRematch lambda";
         this->close();
         MainWindow *newGame = new MainWindow();
         newGame->show();
     };
 
     auto onReturnToMainMenu = [this]() {
-        qDebug() << "Inside MainWindow onReturnToMainMenu lambda";
         this->hide();
         showStartMenu(*qApp);
     };

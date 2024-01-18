@@ -1,8 +1,6 @@
 #ifndef SETTINGSDIALOG_H
 #define SETTINGSDIALOG_H
 
-#include <QDialog>
-#include <QLineEdit>
 #include <QSpinBox>
 #include <QColorDialog>
 #include <QPushButton>

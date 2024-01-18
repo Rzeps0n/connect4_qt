@@ -1,7 +1,8 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include <QApplication>
+#include "MainWindow.h"
+#include "SettingsDialog.h"
 
 void showStartMenu(QApplication& app);
 

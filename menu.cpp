@@ -1,10 +1,4 @@
 #include "menu.h"
-#include <QDialog>
-#include <QPushButton>
-#include <QVBoxLayout>
-#include "GameConfig.h"
-#include "MainWindow.h"
-#include "SettingsDialog.h"
 
 void showStartMenu(QApplication& app) {
     QDialog startMenu;

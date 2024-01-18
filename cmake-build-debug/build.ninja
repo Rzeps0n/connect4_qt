@@ -62,17 +62,17 @@ build CMakeFiles/connect4_project.dir/main.cpp.o: CXX_COMPILER__connect4_project
   OBJECT_DIR = CMakeFiles/connect4_project.dir
   OBJECT_FILE_DIR = CMakeFiles/connect4_project.dir
 
-build CMakeFiles/connect4_project.dir/mainwindow.cpp.o: CXX_COMPILER__connect4_project_Debug /Users/adam/projects/cpp/connect4-project/mainwindow.cpp || cmake_object_order_depends_target_connect4_project
+build CMakeFiles/connect4_project.dir/MainWindow.cpp.o: CXX_COMPILER__connect4_project_Debug /Users/adam/projects/cpp/connect4-project/MainWindow.cpp || cmake_object_order_depends_target_connect4_project
   DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
-  DEP_FILE = CMakeFiles/connect4_project.dir/mainwindow.cpp.o.d
+  DEP_FILE = CMakeFiles/connect4_project.dir/MainWindow.cpp.o.d
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.6 -std=gnu++2b
   INCLUDES = -I/Users/adam/projects/cpp/connect4-project/cmake-build-debug/connect4_project_autogen/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers
   OBJECT_DIR = CMakeFiles/connect4_project.dir
   OBJECT_FILE_DIR = CMakeFiles/connect4_project.dir
 
-build CMakeFiles/connect4_project.dir/gameboard.cpp.o: CXX_COMPILER__connect4_project_Debug /Users/adam/projects/cpp/connect4-project/gameboard.cpp || cmake_object_order_depends_target_connect4_project
+build CMakeFiles/connect4_project.dir/GameBoard.cpp.o: CXX_COMPILER__connect4_project_Debug /Users/adam/projects/cpp/connect4-project/GameBoard.cpp || cmake_object_order_depends_target_connect4_project
   DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
-  DEP_FILE = CMakeFiles/connect4_project.dir/gameboard.cpp.o.d
+  DEP_FILE = CMakeFiles/connect4_project.dir/GameBoard.cpp.o.d
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.6 -std=gnu++2b
   INCLUDES = -I/Users/adam/projects/cpp/connect4-project/cmake-build-debug/connect4_project_autogen/include -isystem /opt/homebrew/lib/QtWidgets.framework/Headers -iframework /opt/homebrew/lib -isystem /opt/homebrew/lib/QtCore.framework/Headers -isystem /opt/homebrew/share/qt/mkspecs/macx-clang -isystem /opt/homebrew/include -isystem /opt/homebrew/lib/QtGui.framework/Headers
   OBJECT_DIR = CMakeFiles/connect4_project.dir
@@ -110,7 +110,7 @@ build CMakeFiles/connect4_project.dir/menu.cpp.o: CXX_COMPILER__connect4_project
 #############################################
 # Link the executable connect4_project
 
-build connect4_project: CXX_EXECUTABLE_LINKER__connect4_project_Debug CMakeFiles/connect4_project.dir/connect4_project_autogen/mocs_compilation.cpp.o CMakeFiles/connect4_project.dir/main.cpp.o CMakeFiles/connect4_project.dir/mainwindow.cpp.o CMakeFiles/connect4_project.dir/gameboard.cpp.o CMakeFiles/connect4_project.dir/SettingsDialog.cpp.o CMakeFiles/connect4_project.dir/WinDialog.cpp.o CMakeFiles/connect4_project.dir/menu.cpp.o | /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets /opt/homebrew/lib/QtGui.framework/Versions/A/QtGui /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore || connect4_project_autogen connect4_project_autogen_timestamp_deps
+build connect4_project: CXX_EXECUTABLE_LINKER__connect4_project_Debug CMakeFiles/connect4_project.dir/connect4_project_autogen/mocs_compilation.cpp.o CMakeFiles/connect4_project.dir/main.cpp.o CMakeFiles/connect4_project.dir/MainWindow.cpp.o CMakeFiles/connect4_project.dir/GameBoard.cpp.o CMakeFiles/connect4_project.dir/SettingsDialog.cpp.o CMakeFiles/connect4_project.dir/WinDialog.cpp.o CMakeFiles/connect4_project.dir/menu.cpp.o | /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets /opt/homebrew/lib/QtGui.framework/Versions/A/QtGui /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore || connect4_project_autogen connect4_project_autogen_timestamp_deps
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.6
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/lib  /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets  /opt/homebrew/lib/QtGui.framework/Versions/A/QtGui  /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore  -framework IOKit  -framework DiskArbitration  -framework  OpenGL  -framework  AGL  -framework AppKit  -framework ImageIO  -framework Metal
   OBJECT_DIR = CMakeFiles/connect4_project.dir
@@ -168,7 +168,7 @@ build connect4_project_autogen/timestamp connect4_project_autogen/mocs_compilati
 #############################################
 # Phony custom command for CMakeFiles/connect4_project_autogen_timestamp_deps
 
-build CMakeFiles/connect4_project_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/connect4_project_autogen_timestamp_deps: phony /opt/homebrew/share/qt/libexec/uic /opt/homebrew/share/qt/libexec/moc /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets
+build CMakeFiles/connect4_project_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/connect4_project_autogen_timestamp_deps: phony /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets /opt/homebrew/share/qt/libexec/moc /opt/homebrew/share/qt/libexec/uic
 
 
 #############################################
