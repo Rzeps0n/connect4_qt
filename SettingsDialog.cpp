@@ -8,6 +8,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent) {
     resolutionComboBox = new QComboBox(this);
     saveButton = new QPushButton(tr("Save"), this);
     exitButton = new QPushButton(tr("Exit"), this);
+    allowResizeCheckBox = new QCheckBox(tr("Allow window resize (experimental)"), this);
 
     QStringList resolutions = {"800x600", "1024x768", "1280x720", "1366x768", "1920x1080", "2560x1440"};
     resolutionComboBox->addItems(resolutions);
@@ -46,6 +47,9 @@ SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent) {
     playerTwoColorLayout->addWidget(playerTwoColorButton);
     mainLayout->addLayout(playerTwoColorLayout);
 
+    mainLayout->addWidget(allowResizeCheckBox);
+    allowResizeCheckBox->setChecked(GameConfig::allowWindowResize);
+
     QHBoxLayout *buttonsLayout = new QHBoxLayout();
     buttonsLayout->addWidget(saveButton);
     buttonsLayout->addWidget(exitButton);
@@ -59,7 +63,6 @@ SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent) {
     setLayout(mainLayout);
     loadSettings();
 }
-
 void SettingsDialog::loadSettings() {
     numColumnsSpinBox->setValue(GameConfig::numColumns);
     numRowsSpinBox->setValue(GameConfig::numRows);
@@ -92,11 +95,10 @@ void SettingsDialog::saveSettings() {
         GameConfig::windowWidth = width;
         GameConfig::windowHeight = height;
     }
+    GameConfig::allowWindowResize = allowResizeCheckBox->isChecked();
 
-    // Signal to close the dialog
     accept();
 }
-
 
 void SettingsDialog::choosePlayerOneColor() {
     QColor color = QColorDialog::getColor(currentPlayerOneColor, this, tr("Choose Player One Color"));

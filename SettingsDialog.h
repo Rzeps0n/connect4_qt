@@ -8,6 +8,7 @@
 #include <QVBoxLayout>
 #include <QComboBox>
 #include <qlabel.h>
+#include <qcheckbox.h>
 
 class SettingsDialog : public QDialog {
 Q_OBJECT
@@ -29,6 +30,7 @@ private:
     QPushButton *playerTwoColorButton;
     QPushButton *saveButton;
     QPushButton *exitButton;
+    QCheckBox *allowResizeCheckBox;
 
     void loadSettings();
     void saveSettings();

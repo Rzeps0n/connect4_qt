@@ -5,8 +5,14 @@ MainWindow::MainWindow(QWidget *parent, std::function<void()> showMenuCallback)
     gameBoard = new GameBoard(this);
     setCentralWidget(gameBoard);
     this->setStyleSheet(QString("background-color: %1;").arg(GameConfig::mainWindowBackgroundColor));
-    this->setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
-    setFixedSize(GameConfig::windowWidth, GameConfig::windowHeight);
+    if (GameConfig::allowWindowResize) {
+        this->setWindowFlags(windowFlags() | Qt::WindowMaximizeButtonHint);
+        resize(GameConfig::windowWidth, GameConfig::windowHeight);
+
+    } else {
+        this->setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
+        setFixedSize(GameConfig::windowWidth, GameConfig::windowHeight);
+    }
     connect(gameBoard, &GameBoard::columnClicked, this,&MainWindow::handleColumnClicked);
     setWindowTitle("Connect 4");
     labels.resize(GameConfig::numRows, std::vector<QLabel*>(GameConfig::numColumns, nullptr));

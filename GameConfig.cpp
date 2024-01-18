@@ -5,7 +5,7 @@ namespace GameConfig {
     int numRows = 6;
     int windowWidth = 800;
     int windowHeight = 600;
-
+    bool allowWindowResize = false;
     QString playerOneColor = "red";
     QString playerTwoColor = "yellow";
     QString tokenBackgroundColor = "darkgrey";
