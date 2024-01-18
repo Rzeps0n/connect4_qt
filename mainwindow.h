@@ -13,6 +13,7 @@
 #include <QPushButton>
 #include <QResizeEvent>
 #include "WinDialog.h"
+#include "menu.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT

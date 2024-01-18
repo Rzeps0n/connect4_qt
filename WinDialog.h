@@ -22,5 +22,4 @@ private:
     std::function<void()> onReturnToMainMenuCallback;
 };
 
-
 #endif // WINDIALOG_H

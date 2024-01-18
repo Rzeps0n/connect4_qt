@@ -735,6 +735,8 @@ connect4_project_autogen/timestamp: \
   ../main.cpp \
   ../mainwindow.cpp \
   ../mainwindow.h \
+  ../menu.cpp \
+  ../menu.h \
   /opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/QAbstractAnimation \
   /opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/QEasingCurve \
   /opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/QList \

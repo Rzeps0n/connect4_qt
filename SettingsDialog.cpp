@@ -60,7 +60,6 @@ SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent) {
     loadSettings();
 }
 
-
 void SettingsDialog::loadSettings() {
     numColumnsSpinBox->setValue(GameConfig::numColumns);
     numRowsSpinBox->setValue(GameConfig::numRows);

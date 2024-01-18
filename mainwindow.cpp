@@ -61,6 +61,7 @@ void MainWindow::handleColumnClicked(int column) {
 
     currentPlayer = (currentPlayer == 1) ? 2 : 1;
 }
+
 void MainWindow::showWinDialog() {
     auto onRematch = [this]() {
         qDebug() << "Inside MainWindow onRematch lambda";
@@ -71,10 +72,8 @@ void MainWindow::showWinDialog() {
 
     auto onReturnToMainMenu = [this]() {
         qDebug() << "Inside MainWindow onReturnToMainMenu lambda";
-        this->close();
-        if (showMainMenuCallback) {
-            showMainMenuCallback();
-        }
+        this->hide();
+        showStartMenu(*qApp);
     };
 
     WinDialog winDialog(this, onRematch, onReturnToMainMenu);

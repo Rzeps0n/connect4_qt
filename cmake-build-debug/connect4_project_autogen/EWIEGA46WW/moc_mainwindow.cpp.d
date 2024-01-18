@@ -686,6 +686,7 @@
   /Users/adam/Projects/cpp/connect4-project/GameConfig.h \
   /Users/adam/Projects/cpp/connect4-project/WinDialog.h \
   /Users/adam/Projects/cpp/connect4-project/gameboard.h \
+  /Users/adam/Projects/cpp/connect4-project/menu.h \
   /opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/QAbstractAnimation \
   /opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/QEasingCurve \
   /opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/QList \
