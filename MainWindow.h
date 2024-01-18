@@ -23,7 +23,7 @@ public:
 
 private slots:
     void handleColumnClicked(int column);
-    void showWinDialog();
+    void showWinDialog(const QString& message);
 
 private:
     std::function<void()> showMainMenuCallback;
@@ -33,7 +33,7 @@ private:
     int findEmptyRow(int column);
     bool checkForWin(int row, int column);
     bool checkLine(const QString& color, int startRow, int startCol, int deltaY, int deltaX);
-
+    bool isBoardFull();
 };
 
 #endif // MAINWINDOW_H

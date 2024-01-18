@@ -56,26 +56,32 @@ void MainWindow::handleColumnClicked(int column) {
 
     if (checkForWin(row, column)) {
         qDebug() << "Player:" << currentPlayer << "has won!";
-        showWinDialog();
+        showWinDialog("Player " + QString::number(currentPlayer) + " Wins!");
     }
-
+    else if (isBoardFull()) {
+        // Show win dialog with a draw message
+        showWinDialog("It's a Draw!");
+    }
     currentPlayer = (currentPlayer == 1) ? 2 : 1;
 }
 
-void MainWindow::showWinDialog() {
+void MainWindow::showWinDialog(const QString& message) {
     auto onRematch = [this]() {
+        qDebug() << "Rematch selected";
         this->close();
         MainWindow *newGame = new MainWindow();
         newGame->show();
     };
 
     auto onReturnToMainMenu = [this]() {
+        qDebug() << "Returning to main menu";
         this->hide();
         showStartMenu(*qApp);
     };
 
     WinDialog winDialog(this, onRematch, onReturnToMainMenu);
     winDialog.setWinner(currentPlayer);
+    winDialog.setMessage(message);
     winDialog.exec();
 }
 
@@ -140,4 +146,15 @@ bool MainWindow::checkLine(const QString& color, int startRow, int startCol, int
         }
     }
     return true;
+}
+
+bool MainWindow::isBoardFull() {
+    for (int row = 0; row < GameConfig::numRows; ++row) {
+        for (int col = 0; col < GameConfig::numColumns; ++col) {
+            if (labels[row][col] == nullptr) {
+                return false; // Found an empty spot
+            }
+        }
+    }
+    return true; // No empty spots found
 }

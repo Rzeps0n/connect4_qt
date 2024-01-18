@@ -39,3 +39,10 @@ void WinDialog::setWinner(int playerNumber) {
         messageLabel->setStyleSheet(QString("color: %1;").arg(playerColor));
     }
 }
+
+void WinDialog::setMessage(const QString& message) {
+    QLabel *messageLabel = findChild<QLabel *>();
+    if (messageLabel) {
+        messageLabel->setText(message);
+    }
+}

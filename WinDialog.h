@@ -11,6 +11,7 @@ Q_OBJECT
 public:
     explicit WinDialog(QWidget *parent = nullptr, std::function<void()> onRematchCallback = nullptr, std::function<void()> onReturnToMainMenuCallback = nullptr);
     void setWinner(int playerNumber);
+    void setMessage(const QString& message);
 
 private:
     QPushButton *rematchButton;
