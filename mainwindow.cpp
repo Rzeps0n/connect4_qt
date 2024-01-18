@@ -56,36 +56,29 @@ void MainWindow::handleColumnClicked(int column) {
 
     if (checkForWin(row, column)) {
         qDebug() << "Player:" << currentPlayer << "has won!";
-        WinDialog winDialog(this);
-        winDialog.setWinner(currentPlayer);
-        winDialog.exec();
+        showWinDialog();
     }
 
     currentPlayer = (currentPlayer == 1) ? 2 : 1;
 }
-// Assuming this function is called when you need to show the win dialog
 void MainWindow::showWinDialog() {
-    // Define the actions for the rematch and return to main menu
     auto onRematch = [this]() {
-        qDebug() << "Rematch button clicked";
-        // Logic for rematch
+        qDebug() << "Inside MainWindow onRematch lambda";
         this->close();
         MainWindow *newGame = new MainWindow();
         newGame->show();
     };
 
     auto onReturnToMainMenu = [this]() {
-        qDebug() << "Return to Main Menu button clicked";
-        // Logic for returning to the main menu
+        qDebug() << "Inside MainWindow onReturnToMainMenu lambda";
         this->close();
         if (showMainMenuCallback) {
             showMainMenuCallback();
         }
     };
 
-    // Create and show the win dialog with the defined actions
     WinDialog winDialog(this, onRematch, onReturnToMainMenu);
-    winDialog.setWinner(currentPlayer); // Assuming setWinner is correctly defined in WinDialog
+    winDialog.setWinner(currentPlayer);
     winDialog.exec();
 }
 
