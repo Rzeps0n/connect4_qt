@@ -1,5 +1,0 @@
-/Users/adam/Projects/cpp/connect4-project/CMakeFiles/connect4_project.dir
-/Users/adam/Projects/cpp/connect4-project/CMakeFiles/edit_cache.dir
-/Users/adam/Projects/cpp/connect4-project/CMakeFiles/rebuild_cache.dir
-/Users/adam/Projects/cpp/connect4-project/CMakeFiles/connect4_project_autogen_timestamp_deps.dir
-/Users/adam/Projects/cpp/connect4-project/CMakeFiles/connect4_project_autogen.dir
