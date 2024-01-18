@@ -1,6 +1,6 @@
 #ifndef GAMECONFIG_H
 #define GAMECONFIG_H
-#import "QString"
+#include "QString"
 
 namespace GameConfig {
     extern int numColumns;
