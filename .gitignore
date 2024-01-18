@@ -1,4 +1,5 @@
 .*
 cmake-build-debug
+CMakeFiles
 bin
 lib

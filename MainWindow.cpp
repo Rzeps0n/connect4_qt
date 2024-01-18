@@ -28,7 +28,6 @@ MainWindow::~MainWindow() {}
 void MainWindow::handleColumnClicked(int column) {
     int row = findEmptyRow(column);
     if (row < 0) {
-        qDebug() << "Column" << column << "is full!";
         return; // Column is full
     }
     int columnWidth = this->width() / GameConfig::numColumns;
@@ -61,7 +60,6 @@ void MainWindow::handleColumnClicked(int column) {
     labels[row][column] = token;
 
     if (checkForWin(row, column)) {
-        qDebug() << "Player:" << currentPlayer << "has won!";
         showWinDialog("Player " + QString::number(currentPlayer) + " Wins!");
     }
     else if (isBoardFull()) {
@@ -73,14 +71,12 @@ void MainWindow::handleColumnClicked(int column) {
 
 void MainWindow::showWinDialog(const QString& message) {
     auto onRematch = [this]() {
-        qDebug() << "Rematch selected";
         this->close();
         MainWindow *newGame = new MainWindow();
         newGame->show();
     };
 
     auto onReturnToMainMenu = [this]() {
-        qDebug() << "Returning to main menu";
         this->hide();
         showStartMenu(*qApp);
     };
