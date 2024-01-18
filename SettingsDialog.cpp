@@ -1,7 +1,11 @@
 #include "SettingsDialog.h"
 
 SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent) {
-    this->setStyleSheet(QString("background-color: %1;").arg(GameConfig::backgroundColor));
+    QString combinedStyle = QString(
+            "background-color: %1; "
+            "color: %2;"
+    ).arg(GameConfig::tokenBackgroundColor, GameConfig::buttonTextColor);
+    this->setStyleSheet(combinedStyle);
     numColumnsSpinBox = new QSpinBox(this);
     numRowsSpinBox = new QSpinBox(this);
     numColumnsSpinBox->setRange(1, 20); // Adjust these ranges as needed
@@ -10,6 +14,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent) {
     saveButton = new QPushButton(tr("Save"), this);
     exitButton = new QPushButton(tr("Exit"), this);
     allowResizeCheckBox = new QCheckBox(tr("Allow window resize (experimental)"), this);
+    allowResizeCheckBox->setStyleSheet(combinedStyle);
 
     QStringList resolutions = {"800x600", "1024x768", "1280x720", "1366x768", "1920x1080", "2560x1440"};
     resolutionComboBox->addItems(resolutions);

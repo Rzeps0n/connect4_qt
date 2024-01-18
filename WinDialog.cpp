@@ -35,11 +35,11 @@ WinDialog::WinDialog(QWidget *parent, std::function<void()> onRematchCallback, s
 
     connect(rematchButton, &QPushButton::clicked, this, [this, onRematchCallback]() {
         if (onRematchCallback) onRematchCallback();
-        close();
+        this->close();
     });
     connect(returnToMainMenuButton, &QPushButton::clicked, this, [this, onReturnToMainMenuCallback]() {
         if (onReturnToMainMenuCallback) onReturnToMainMenuCallback();
-        close();
+        this->close();
     });
 }
 

@@ -8,6 +8,8 @@ set(CMAKE_AUTOUIC ON)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+#set(CMAKE_PREFIX_PATH "C:/Qt/6.2.4/mingw_64/lib/cmake")
+
 find_package(Qt6 COMPONENTS Widgets REQUIRED Core)
 
 add_executable(Connect4 main.cpp MainWindow.cpp GameBoard.h GameBoard.cpp GameConfig.h SettingsDialog.h SettingsDialog.cpp WinDialog.h WinDialog.cpp menu.h menu.cpp GameConfig.cpp)
