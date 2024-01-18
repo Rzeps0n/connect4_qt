@@ -13,6 +13,7 @@
 #include <QResizeEvent>
 #include "WinDialog.h"
 #include "menu.h"
+#include <vector>
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
@@ -28,7 +29,7 @@ private slots:
 private:
     std::function<void()> showMainMenuCallback;
     GameBoard *gameBoard;
-    QLabel *labels[GameConfig::numRows][GameConfig::numColumns];
+    std::vector<std::vector<QLabel*>> labels;
     int currentPlayer;
     int findEmptyRow(int column);
     bool checkForWin(int row, int column);

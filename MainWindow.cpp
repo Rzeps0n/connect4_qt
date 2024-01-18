@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent, std::function<void()> showMenuCallback)
     setFixedSize(GameConfig::windowWidth, GameConfig::windowHeight);
     connect(gameBoard, &GameBoard::columnClicked, this,&MainWindow::handleColumnClicked);
     setWindowTitle("Connect 4");
-
+    labels.resize(GameConfig::numRows, std::vector<QLabel*>(GameConfig::numColumns, nullptr));
     for (int row = 0; row < GameConfig::numRows; ++row) {
         for (int col = 0; col < GameConfig::numColumns; ++col) {
             labels[row][col] = nullptr;

@@ -75,12 +75,28 @@ void SettingsDialog::loadSettings() {
 }
 
 void SettingsDialog::saveSettings() {
-    int numColumns = numColumnsSpinBox->value();
-    int numRows = numRowsSpinBox->value();
+    // Update the number of columns and rows
+    GameConfig::numColumns = numColumnsSpinBox->value();
+    GameConfig::numRows = numRowsSpinBox->value();
+
+    // Update player colors
+    GameConfig::playerOneColor = currentPlayerOneColor.name();
+    GameConfig::playerTwoColor = currentPlayerTwoColor.name();
+
+    // Handle resolution change
     QString selectedResolution = resolutionComboBox->currentText();
     QStringList dimensions = selectedResolution.split("x");
+    if (dimensions.size() == 2) {
+        int width = dimensions[0].toInt();
+        int height = dimensions[1].toInt();
+        GameConfig::windowWidth = width;
+        GameConfig::windowHeight = height;
+    }
+
+    // Signal to close the dialog
     accept();
 }
+
 
 void SettingsDialog::choosePlayerOneColor() {
     QColor color = QColorDialog::getColor(currentPlayerOneColor, this, tr("Choose Player One Color"));

@@ -723,6 +723,7 @@ connect4_project_autogen/timestamp: \
 	/Users/adam/projects/cpp/connect4-project/CMakeLists.txt \
 	/Users/adam/projects/cpp/connect4-project/GameBoard.cpp \
 	/Users/adam/projects/cpp/connect4-project/GameBoard.h \
+	/Users/adam/projects/cpp/connect4-project/GameConfig.cpp \
 	/Users/adam/projects/cpp/connect4-project/GameConfig.h \
 	/Users/adam/projects/cpp/connect4-project/MainWindow.cpp \
 	/Users/adam/projects/cpp/connect4-project/MainWindow.h \

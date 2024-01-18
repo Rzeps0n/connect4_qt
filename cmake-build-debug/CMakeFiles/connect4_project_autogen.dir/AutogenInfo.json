@@ -423,6 +423,11 @@
 	[
 		[ "/Users/adam/projects/cpp/connect4-project/GameBoard.cpp", "MU", null ],
 		[
+			"/Users/adam/projects/cpp/connect4-project/GameConfig.cpp",
+			"MU",
+			null
+		],
+		[
 			"/Users/adam/projects/cpp/connect4-project/MainWindow.cpp",
 			"MU",
 			null

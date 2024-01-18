@@ -3,18 +3,18 @@
 #import "QString"
 
 namespace GameConfig {
-    constexpr int numColumns = 7;
-    constexpr int numRows = 6;
-    constexpr int windowWidth = 800;
-    constexpr int windowHeight = 600;
+    extern int numColumns;
+    extern int numRows;
+    extern int windowWidth;
+    extern int windowHeight;
 
-    const QString playerOneColor = "red";
-    const QString playerTwoColor = "yellow";
-    const QString tokenBackgroundColor = "darkgrey";
-    const QString backgroundColor = "#383434";
-    const QString buttonColor = "#f0f0f0";
-    const QString buttonTextColor = "#000000";
-    const QString mainWindowBackgroundColor = "#383434";
+    extern QString playerOneColor;
+    extern QString playerTwoColor;
+    extern QString tokenBackgroundColor;
+    extern QString backgroundColor;
+    extern QString buttonColor;
+    extern QString buttonTextColor;
+    extern QString mainWindowBackgroundColor;
 }
 
 #endif // GAMECONFIG_H

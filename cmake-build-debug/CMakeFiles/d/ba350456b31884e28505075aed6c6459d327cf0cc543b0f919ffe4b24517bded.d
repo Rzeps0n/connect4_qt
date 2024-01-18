@@ -723,6 +723,7 @@ connect4_project_autogen/timestamp: \
   ../CMakeLists.txt \
   ../GameBoard.cpp \
   ../GameBoard.h \
+  ../GameConfig.cpp \
   ../GameConfig.h \
   ../MainWindow.cpp \
   ../MainWindow.h \
