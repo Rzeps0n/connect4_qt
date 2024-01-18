@@ -116,15 +116,15 @@ build CMakeFiles/connect4_project.dir/GameConfig.cpp.o: CXX_COMPILER__connect4_p
 
 
 #############################################
-# Link the executable connect4_project
+# Link the executable bin/connect4_project
 
-build connect4_project: CXX_EXECUTABLE_LINKER__connect4_project_Debug CMakeFiles/connect4_project.dir/connect4_project_autogen/mocs_compilation.cpp.o CMakeFiles/connect4_project.dir/main.cpp.o CMakeFiles/connect4_project.dir/MainWindow.cpp.o CMakeFiles/connect4_project.dir/GameBoard.cpp.o CMakeFiles/connect4_project.dir/SettingsDialog.cpp.o CMakeFiles/connect4_project.dir/WinDialog.cpp.o CMakeFiles/connect4_project.dir/menu.cpp.o CMakeFiles/connect4_project.dir/GameConfig.cpp.o | /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets /opt/homebrew/lib/QtGui.framework/Versions/A/QtGui /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore || connect4_project_autogen connect4_project_autogen_timestamp_deps
+build bin/connect4_project: CXX_EXECUTABLE_LINKER__connect4_project_Debug CMakeFiles/connect4_project.dir/connect4_project_autogen/mocs_compilation.cpp.o CMakeFiles/connect4_project.dir/main.cpp.o CMakeFiles/connect4_project.dir/MainWindow.cpp.o CMakeFiles/connect4_project.dir/GameBoard.cpp.o CMakeFiles/connect4_project.dir/SettingsDialog.cpp.o CMakeFiles/connect4_project.dir/WinDialog.cpp.o CMakeFiles/connect4_project.dir/menu.cpp.o CMakeFiles/connect4_project.dir/GameConfig.cpp.o | /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets /opt/homebrew/lib/QtGui.framework/Versions/A/QtGui /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore || connect4_project_autogen connect4_project_autogen_timestamp_deps
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=13.6
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/lib  /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets  /opt/homebrew/lib/QtGui.framework/Versions/A/QtGui  /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore  -framework IOKit  -framework DiskArbitration  -framework  OpenGL  -framework  AGL  -framework AppKit  -framework ImageIO  -framework Metal
   OBJECT_DIR = CMakeFiles/connect4_project.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = connect4_project
+  TARGET_FILE = bin/connect4_project
   TARGET_PDB = connect4_project.dbg
 
 
@@ -176,7 +176,7 @@ build connect4_project_autogen/timestamp connect4_project_autogen/mocs_compilati
 #############################################
 # Phony custom command for CMakeFiles/connect4_project_autogen_timestamp_deps
 
-build CMakeFiles/connect4_project_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/connect4_project_autogen_timestamp_deps: phony /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets /opt/homebrew/share/qt/libexec/uic /opt/homebrew/share/qt/libexec/moc /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore
+build CMakeFiles/connect4_project_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/connect4_project_autogen_timestamp_deps: phony /opt/homebrew/share/qt/libexec/uic /opt/homebrew/lib/QtCore.framework/Versions/A/QtCore /opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets /opt/homebrew/share/qt/libexec/moc
 
 
 #############################################
@@ -187,6 +187,8 @@ build CMakeFiles/connect4_project_autogen | ${cmake_ninja_workdir}CMakeFiles/con
 # =============================================================================
 # Target aliases.
 
+build connect4_project: phony bin/connect4_project
+
 # =============================================================================
 # Folder targets.
 
@@ -195,7 +197,7 @@ build CMakeFiles/connect4_project_autogen | ${cmake_ninja_workdir}CMakeFiles/con
 #############################################
 # Folder: /Users/adam/projects/cpp/connect4-project/cmake-build-debug
 
-build all: phony connect4_project
+build all: phony bin/connect4_project
 
 # =============================================================================
 # Built-in targets
