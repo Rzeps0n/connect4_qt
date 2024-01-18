@@ -71,7 +71,7 @@ void MainWindow::handleColumnClicked(int column) {
 
 void MainWindow::showWinDialog(const QString& message) {
     auto onRematch = [this]() {
-        this->close();
+        this->hide();  // Ensure this line is being executed
         MainWindow *newGame = new MainWindow();
         newGame->show();
     };
