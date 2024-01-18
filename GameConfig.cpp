@@ -12,5 +12,4 @@ namespace GameConfig {
     QString backgroundColor = "#383434";
     QString buttonColor = "#f0f0f0";
     QString buttonTextColor = "#000000";
-    QString mainWindowBackgroundColor = "#383434";
 }

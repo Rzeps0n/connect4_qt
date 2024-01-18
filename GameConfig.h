@@ -14,7 +14,6 @@ namespace GameConfig {
     extern QString backgroundColor;
     extern QString buttonColor;
     extern QString buttonTextColor;
-    extern QString mainWindowBackgroundColor;
     extern bool allowWindowResize;
 }
 

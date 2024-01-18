@@ -4,7 +4,7 @@ MainWindow::MainWindow(QWidget *parent, std::function<void()> showMenuCallback)
         : QMainWindow(parent), showMainMenuCallback(showMenuCallback) {
     gameBoard = new GameBoard(this);
     setCentralWidget(gameBoard);
-    this->setStyleSheet(QString("background-color: %1;").arg(GameConfig::mainWindowBackgroundColor));
+    this->setStyleSheet(QString("background-color: %1;").arg(GameConfig::backgroundColor));
     if (GameConfig::allowWindowResize) {
         this->setWindowFlags(windowFlags() | Qt::WindowMaximizeButtonHint);
         resize(GameConfig::windowWidth, GameConfig::windowHeight);

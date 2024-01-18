@@ -1,6 +1,7 @@
 #include "SettingsDialog.h"
 
 SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent) {
+    this->setStyleSheet(QString("background-color: %1;").arg(GameConfig::backgroundColor));
     numColumnsSpinBox = new QSpinBox(this);
     numRowsSpinBox = new QSpinBox(this);
     numColumnsSpinBox->setRange(1, 20); // Adjust these ranges as needed
@@ -12,6 +13,18 @@ SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent) {
 
     QStringList resolutions = {"800x600", "1024x768", "1280x720", "1366x768", "1920x1080", "2560x1440"};
     resolutionComboBox->addItems(resolutions);
+
+    // Define and apply the button style
+    QString buttonStyle = QString(
+            "QPushButton { "
+            "background-color: %1; "
+            "color: %2; "
+            "}"
+    ).arg(GameConfig::buttonColor, GameConfig::buttonTextColor);
+
+    saveButton->setStyleSheet(buttonStyle);
+    exitButton->setStyleSheet(buttonStyle);
+
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
 

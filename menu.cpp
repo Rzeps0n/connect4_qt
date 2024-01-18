@@ -4,6 +4,7 @@ void showStartMenu(QApplication& app) {
     QDialog startMenu;
     startMenu.setWindowTitle("Start Menu");
     startMenu.resize(GameConfig::windowWidth, GameConfig::windowHeight);
+    startMenu.setStyleSheet(QString("background-color: %1;").arg(GameConfig::backgroundColor));
 
     QPushButton startButton("Start Game", &startMenu);
     QPushButton settingsButton("Settings", &startMenu);
