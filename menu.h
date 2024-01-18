@@ -3,6 +3,8 @@
 
 #include "MainWindow.h"
 #include "SettingsDialog.h"
+#include <QDesktopServices>
+#include <QUrl>
 
 void showStartMenu(QApplication& app);
 

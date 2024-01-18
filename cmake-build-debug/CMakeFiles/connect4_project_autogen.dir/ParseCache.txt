@@ -5004,6 +5004,7 @@
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/QRect
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/QSize
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/QSizeF
+ mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/QUrl
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/q20functional.h
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/q20memory.h
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/q20type_traits.h
@@ -5132,6 +5133,7 @@
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/qvarlengtharray.h
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/qversiontagging.h
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtCore.framework/Versions/A/Headers/qxptype_traits.h
+ mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtGui.framework/Versions/A/Headers/QDesktopServices
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtGui.framework/Versions/A/Headers/QMouseEvent
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtGui.framework/Versions/A/Headers/QPainter
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtGui.framework/Versions/A/Headers/QResizeEvent
@@ -5141,6 +5143,7 @@
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtGui.framework/Versions/A/Headers/qbrush.h
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtGui.framework/Versions/A/Headers/qcolor.h
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtGui.framework/Versions/A/Headers/qcursor.h
+ mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtGui.framework/Versions/A/Headers/qdesktopservices.h
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtGui.framework/Versions/A/Headers/qevent.h
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtGui.framework/Versions/A/Headers/qeventpoint.h
  mdp:/opt/homebrew/Cellar/qt/6.6.1/lib/QtGui.framework/Versions/A/Headers/qfont.h

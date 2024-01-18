@@ -8,6 +8,7 @@ void showStartMenu(QApplication& app) {
     QPushButton startButton("Start Game", &startMenu);
     QPushButton settingsButton("Settings", &startMenu);
     QPushButton quitButton("Quit Game", &startMenu);
+    QPushButton gitHubButton("GitHub", &startMenu);
 
     QString buttonStyle = QString(
             "QPushButton { "
@@ -21,11 +22,14 @@ void showStartMenu(QApplication& app) {
     startButton.setStyleSheet(buttonStyle);
     settingsButton.setStyleSheet(buttonStyle);
     quitButton.setStyleSheet(buttonStyle);
+    gitHubButton.setStyleSheet(buttonStyle);
 
     QVBoxLayout layout;
     layout.addWidget(&startButton);
     layout.addWidget(&settingsButton);
     layout.addWidget(&quitButton);
+    layout.addWidget(&gitHubButton);
+
     startMenu.setLayout(&layout);
 
     QObject::connect(&startButton, &QPushButton::clicked, [&]() {
@@ -40,6 +44,10 @@ void showStartMenu(QApplication& app) {
     });
 
     QObject::connect(&quitButton, &QPushButton::clicked, &app, &QApplication::exit);
+
+    QObject::connect(&gitHubButton, &QPushButton::clicked, [&]() {
+        QDesktopServices::openUrl(QUrl("https://github.com/Rzeps0n/connect4_qt"));
+    });
 
     startMenu.exec();
 }
