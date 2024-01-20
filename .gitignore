@@ -3,3 +3,6 @@ cmake-build-debug
 CMakeFiles
 bin
 lib
+CMakeCache.txt
+cmake_install.cmake
+Makefile
